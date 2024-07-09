@@ -21,36 +21,36 @@
   <!-- Add more OG meta tags as needed -->
 
   <style>
-    /* Add your own styling here */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
       background-color: #181a1d;
       margin: 0;
       padding: 0;
-      color: #000000;
+      color: #d1d1d1;
+      line-height: 1.6;
     }
     .container {
-      max-width: 850px;
-      margin: 0 auto;
-      padding: none;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
       display: flex;
       flex-direction: column;
     }
     .social-links {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: none;
-      margin-left: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin: 0px;
     }
     .social-links a {
-      color: #FFFFFF;
+      color: #00ff33;
       text-decoration: none;
       font-weight: bold;
-      padding: 10px 20px;
+      padding: 10px;
       border: 2px solid #00ff33;
-      border-radius: 10px;
+      border-radius: 5px;
       transition: background-color 0.3s ease, color 0.3s ease;
+      text-align: center;
     }
     .social-links a:hover {
       background-color: #00ff33;
@@ -58,9 +58,6 @@
     }
     a:link,
     a:visited {
-      display: inline-block;
-      margin-bottom: 10px;
-      text-align: left;
       color: #00ff33;
       background-color: transparent;
       text-decoration: none;
@@ -71,47 +68,67 @@
       text-decoration: underline;
     }
     .section {
-      margin-bottom: 20px;
-      border-top: 1px solid #00ff33; /* Green Border */
-      padding-top: 20px; /* Added padding for space between border and content */
+      margin-bottom: 30px;
+      padding: 20px;
+      background-color: #232527;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      width: 100%;
     }
     .section-title {
-      font-size: 24px;
+      font-size: 28px;
       font-weight: bold;
       margin-bottom: 10px;
+      color: #00ff33;
+      text-align: left;
     }
     .section-content {
       margin-bottom: 10px;
+      text-align: justify;
+    }
+    hr {
+      border: 0;
+      height: 1px;
+      background-color: #00ff33;
+      margin: 20px 0;
+      width: 100%;
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="section">
       <h1 class="section-title">About Me:</h1>
       <div class="section-content">
-        <p>Hello there. My name is Rushi and I'm currently pursuing  Electronics & Communications Engineering in southern India.<br>This portfolio is a work in progress, meanwhile - feel free to communicate with me via LinkedIn/Twitter!</p>
+        <p>Hello there. My name is Rushi and I'm currently pursuing Electronics & Communications Engineering in southern India.<br>This portfolio is a work in progress, meanwhile - feel free to communicate with me via LinkedIn/Twitter!</p>
+      </div>
     </div>
-<div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="nocsushi" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/nocsushi?trk=profile-badge">LinkedIn for more details:</a></div>
-              
-    <hr width="850px;" color="#00ff33" size="1"> <!-- Green Line -->
-    
-    <h2>My socials:</h2>
-    <div class="social-links">
-    <p>Discord: @nocturnalsushi</p>
-      <a href="https://twitter.com/nocturnal_sushi" target="_blank">Twitter / 𝕏</a>
-      <a href="https://instagram.com/renzu_to_sushi" target="_blank">Instagram</a>
-      <a href="https://linktr.ee/nocturnalsushi" target="_blank">More links</a>
-    </div>
-
-    <!-- Add more link sections as needed -->
 
     <div class="section">
-      <h2>Reality check:</h2>
-      <div style="left:0; width:100%; height:0; position:relative; padding-bottom:25%; margin:0 auto"><iframe src="https://www.tickcounter.com/widget/countdown/4464241" style="top:0; left:0; width:100%; height:100%; position:absolute; border:0; overflow:hidden; pointer-event:none" title="[IST] 2024 begins in:"></iframe></div>
+      <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="nocsushi" data-version="v1">
+        <a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/nocsushi?trk=profile-badge">LinkedIn for more details:</a>
+      </div>
+    </div>
+              
+    <hr>
+
+    <div class="section">
+      <h2 class="section-title">My socials:</h2>
+      <div class="social-links">
+        <p>Discord: @nocturnalsushi</p>
+        <a href="https://twitter.com/nocturnal_sushi" target="_blank">Twitter / 𝕏</a>
+        <a href="https://instagram.com/renzu_to_sushi" target="_blank">Instagram</a>
+        <a href="https://linktr.ee/nocturnalsushi" target="_blank">More links</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Reality check:</h2>
+      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; max-width:100%; background:#000000;">
+        <iframe src="https://www.tickcounter.com/widget/countdown/4464241" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" title="[IST] 2024 begins in:"></iframe>
+      </div>
     </div>
   </div>
-  <div> <!--linkedin-->
-    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
-  </div>
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 </body>
 </html>
