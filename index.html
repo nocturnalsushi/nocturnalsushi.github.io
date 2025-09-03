@@ -5,224 +5,231 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-20MTLV9D4Z"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){dataLayer.push(arguments);} 
     gtag('js', new Date());
-
     gtag('config', 'G-20MTLV9D4Z');
   </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rushi B - Portfolio</title>
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <meta property="og:title" content="Rushi B - Portfolio">
-  <meta property="og:description" content="Electronics & Communications Engineer, Product Tester, Innovator">
+  <meta property="og:description" content="Electronics & Communications Engineer · Product Tester · Builder">
   <meta property="og:image" content="https://i.imgur.com/pC1mMc0.png">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
+    :root { --brand: #00ff77; --accent: #ff3d00; --dark-bg: #0b0b0b; --blue: #003366; }
+
+    html, body { height: 100%; }
     body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      margin: 0; padding: 0; font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height: 1.6;
+      transition: background 0.5s ease, color 0.5s ease;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 50% 40%, #0a0a26, #000);
       color: #e0e0e0;
-      background: radial-gradient(circle at 50% 50%, #0b0b0b, #000000);
-      overflow: hidden;
     }
-    canvas#stars {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
+
+    /* Light theme */
+    body.light { 
+      background: linear-gradient(to top, #87ceeb 0%, #00aaff 100%); 
+      color: var(--blue); 
+      background-attachment: fixed;  /* keeps the gradient fixed on scroll */
+      background-repeat: no-repeat;
+      background-size: cover;
     }
-    .container {
-      max-width: 900px;
-      margin: 20px;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      background-color: rgba(26, 26, 26, 0.85);
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
-    }
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .header h1 {
-      font-size: 48px;
-      color: #00ff77;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-    }
-    .header p {
-      font-weight: 300;
-      font-size: 20px;
-      color: #b0b0b0;
-    }
-    .section {
-      margin-bottom: 30px;
-      padding: 20px;
-      background-color: rgba(36, 36, 36, 0.8);
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    }
-    .section-title {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 15px;
-      color: #00ff77;
-    }
-    .section-content {
-      font-weight: 300;
-      line-height: 1.6;
-      font-size: 16px;
-      color: #d0d0d0;
-    }
-    .social-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-    .social-links a {
-      color: #00ff77;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 12px 24px;
-      border: 2px solid #00ff77;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      text-align: center;
-      margin: 5px;
-      max-width: 180px;
-    }
-    .social-links a:hover {
-      background-color: #00ff77;
-      color: #0f0f0f;
-    }
-    a {
-      color: #00ff77;
-      transition: color 0.3s ease;
-    }
-    a:hover {
-      color: #ff3d00;
-      text-decoration: underline;
-    }
-    hr {
-      border: 0;
-      height: 1px;
-      background-color: #00ff77;
-      margin: 25px 0;
-      width: 100%;
-    }
+
+    /* Background layers */
+    #stars { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -3; pointer-events: none; }
+
+    /* Clouds (visible in light theme) */
+    .clouds { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -4; pointer-events: none; }
+    .clouds svg { width: 220%; height: 100%; position: absolute; top: 0; left: -60%; }
+    .clouds .layer1 { animation: drift 150s linear infinite; opacity: 0.6; }
+    .clouds .layer2 { animation: drift 240s linear infinite reverse; opacity: 0.45; }
+    @keyframes drift { from { transform: translateX(0); } to { transform: translateX(48%); } }
+    body.dark .clouds { opacity: 0; visibility: hidden; }
+
+    /* Container */
+    .container { max-width: 1000px; margin: 64px auto; padding: 28px 26px; background: rgba(26,26,26,0.72);
+                border-radius: 16px; backdrop-filter: blur(8px); box-shadow: 0 16px 40px rgba(0,0,0,0.6); }
+    body.light .container { background: rgba(255,255,255,0.82); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+
+    .header { text-align: center; margin-bottom: 36px; }
+    .header h1 { margin: 0 0 8px; font-size: 44px; letter-spacing: 0.5px; color: var(--brand); }
+    body.light .header h1 { color: var(--blue); }
+    .header h3 { margin: 4px 0 8px; font-weight: 400; color: #bdbdbd; }
+    body.light .header h3 { color: var(--blue); opacity: 0.9; }
+    .header p { margin: 6px 0 0; color: #b0b0b0; }
+    body.light .header p { color: var(--blue); opacity: 0.9; }
+
+    /* Sections */
+    .section { margin-bottom: 36px; padding: 20px; border-radius: 12px; background: rgba(36,36,36,0.78);
+              box-shadow: 0 8px 20px rgba(0,0,0,0.35); opacity: 0; transform: translateY(28px);
+              transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+    .section.visible { opacity: 1; transform: translateY(0); }
+    body.light .section { background: rgba(255,255,255,0.86); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+
+    .section-title { margin: 0 0 10px; font-size: 26px; font-weight: 700; color: var(--brand); }
+    body.light .section-title { color: var(--blue); }
+    .section-content { font-weight: 300; font-size: 16px; line-height: 1.6; color: #dcdcdc; }
+    body.light .section-content { color: var(--blue); }
+
+    ul { margin: 8px 0 0 18px; }
+    li { margin: 8px 0; }
+
+    .social-links { display:flex; flex-wrap:wrap; gap:10px; }
+    .social-links a { flex: 1 1 180px; display:inline-block; text-align:center; padding:12px 16px; border-radius:8px;
+                      border:2px solid var(--brand); color:var(--brand); text-decoration:none; font-weight:600; transition:0.25s ease; }
+    body.light .social-links a { border-color: var(--blue); color: var(--blue); }
+    .social-links a:hover { background: var(--brand); color: #080808; transform: translateY(-2px); }
+
+    hr { border:0; height:1px; background: var(--brand); opacity: 0.6; margin:24px 0; }
+    body.light hr { background: var(--blue); }
+
+    /* Theme toggle */
+    .theme-toggle { position: fixed; top: 18px; right: 18px; width:50px; height:50px; border-radius:50%; border:none; cursor:pointer;
+                    z-index: 20; font-size:20px; line-height:50px; display:flex; align-items:center; justify-content:center;
+                    background: rgba(0,0,0,0.45); color:#fff; box-shadow: 0 6px 16px rgba(0,0,0,0.25); transition: transform 0.2s ease, background 0.3s ease; }
+    .theme-toggle:hover { transform: translateY(-3px); }
+    body.light .theme-toggle { background: rgba(255,255,255,0.78); color: var(--blue); }
+
+    footer { text-align: center; font-size:12px; opacity:0.75; padding-top:8px; }
+
+    /* Responsive */
+    @media (max-width: 640px) { .container { margin: 32px 16px; padding: 18px; } .header h1 { font-size: 34px; } }
   </style>
 </head>
-<body>
+<body class="dark">
+  <!-- Stars canvas -->
   <canvas id="stars"></canvas>
-  <div class="container">
-    <div class="header">
-      <h1>Rushi B</h1>
-      <p>Electronics & Communications Engineer | Active DVT Tester & Community Product Reviewer</p>
-    </div>
 
-    <div class="section">
+  <!-- Clouds (visible in light theme) -->
+  <div class="clouds" aria-hidden="true">
+    <svg class="layer1" viewBox="0 0 1200 400" preserveAspectRatio="none">
+      <defs><linearGradient id="cloudGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0.6"/></linearGradient></defs>
+      <g fill="url(#cloudGrad)">
+        <ellipse cx="100" cy="120" rx="120" ry="50"/>
+        <ellipse cx="220" cy="110" rx="140" ry="60"/>
+        <ellipse cx="380" cy="130" rx="120" ry="50"/>
+        <ellipse cx="560" cy="100" rx="160" ry="70"/>
+        <ellipse cx="760" cy="120" rx="140" ry="60"/>
+        <ellipse cx="980" cy="110" rx="160" ry="70"/>
+      </g>
+    </svg>
+    <svg class="layer2" viewBox="0 0 1200 400" preserveAspectRatio="none">
+      <g fill="#ffffff" opacity="0.7">
+        <ellipse cx="160" cy="240" rx="120" ry="48"/>
+        <ellipse cx="340" cy="220" rx="140" ry="58"/>
+        <ellipse cx="520" cy="250" rx="130" ry="54"/>
+        <ellipse cx="740" cy="230" rx="150" ry="60"/>
+        <ellipse cx="960" cy="250" rx="140" ry="58"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Theme toggle (shows moon/sun and toggles) -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+
+  <div class="container">
+    <header class="header">
+      <h1>Rushi B</h1>
+      <h3>Electronics & Communications Engineer | Active DVT Tester & Community Product Reviewer</h3>
+    </header>
+
+    <section class="section">
       <h2 class="section-title">About Me</h2>
       <div class="section-content">
-        <p>I am an Electronics & Communications Engineering student based in southern India with a passion for creating innovative technology solutions. I actively contribute as a DVT (Design Validation Testing) tester for Oppo and a community product reviewer for Nothing, offering practical insights to improve consumer technology.</p>
-        <p>My expertise spans product development, IoT systems, AI/ML applications, and immersive user experiences.</p>
-      </div>
-    </div>
+        I am an Electronics & Communications Engineering student based in southern India with a passion for creating innovative technology solutions. I actively contribute as a DVT (Design Validation Testing) tester for Oppo and a community product reviewer for Nothing, offering practical insights to improve consumer technology.
 
-    <div class="section">
-      <h2 class="section-title">Projects & Expertise</h2>
+        <br><br>
+        My expertise spans product development, IoT systems, and immersive user experiences.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Experience & Highlights</h2>
       <div class="section-content">
         <ul>
-          <li>Autonomous hovering drone with interactive control systems.</li>
-          <li>Pregnancy companion app with fetal monitoring belt (MaHealAh).</li>
-          <li>IoT game using ESP32, FastLED, and MQTT with sensor-based gameplay.</li>
-          <li>AI/ML research on battery health prediction using NASA datasets.</li>
-          <li>Consumer electronics product testing and user experience optimization.</li>
+          <li><strong>Nothing (Community Creator/Reviewer):</strong> 3+ years of content across Instagram & YouTube; invited to the Phone(3) launch event (July 2025).</li>
+          <li><strong>Oppo (DVT Tester):</strong> ~1 year of Design Validation Testing with <strong>3 device projects</strong> completed—hands‑on feedback on stability, UX, and edge cases.</li>
+          <li><strong>Technical Events:</strong> Led/hosted IEEE sessions and community activities; built gamified drone experiences for workshops.</li>
         </ul>
       </div>
-    </div>
+    </section>
 
-    <div class="section">
-      <h2 class="section-title">Connect With Me</h2>
-      <div class="social-links">
-        <a href="https://twitter.com/nocturnal_sushi" target="_blank">Twitter / 𝕏</a>
-        <a href="https://instagram.com/renzu_to_sushi" target="_blank">Instagram</a>
-        <a href="https://www.linkedin.com/in/rushi-b" target="_blank">LinkedIn</a>
-        <a href="https://linktr.ee/nocturnalsushi" target="_blank">More Links</a>
+    <section class="section">
+      <h2 class="section-title">Projects</h2>
+      <div class="section-content">
+        <ul>
+          <li><strong>Data Analysis of CPU types, performance and relevance · Python, Jupyter Notebook</strong><br>
+              December 2023<br>
+              Analyzed a Kaggle dataset of 3,500+ PassMark CPU benchmarks, evaluating performance, pricing, value, and market relevance trends across a decade. Applied Python-based data analysis and visualization techniques to derive insights clearly.</li>
+
+          <li><strong>Pi-Powered Action Cam · Raspberry Pi 4, Python, Open GoPro</strong><br>
+              July 2024<br>
+              Built a GoPro companion with Raspberry Pi 4 and Open GoPro API, enabling camera control via BLE/WiFi/USB. Designed it to log battery wirelessly and capture photos/videos through USB.</li>
+
+          <li><strong>Rio: Realtime Interactive Omnibot · HTML/CSS, render.com, Python, Groq AI, llama3</strong><br>
+              July 2024<br>
+              Finalist at IBM EcoEquify Hackathon 2024 as part of a 3-member team; built an interactive interface and customized Llama 3 into a multilingual tutor that delivers personalized learning journeys to each user's abilities and needs.</li>
+        </ul>
       </div>
-    </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Socials</h2>
+      <div class="section-content">
+        <div class="social-links">
+          <a href="https://www.youtube.com/@talktechtive" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://x.com/nocturnal_sushi" target="_blank" rel="noopener">Twitter / X</a>
+          <a href="https://www.instagram.com/renzu_to_sushi/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://linktr.ee/nocturnalsushi" target="_blank" rel="noopener">More Links</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>© <span id="year"></span> Rushi B</footer>
   </div>
 
   <script>
-    const canvas = document.getElementById('stars');
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-    const numStars = 100;
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    // Theme toggle & persistence
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      body.classList.add('light');
+      toggleBtn.textContent = '☀️';
+    } else {
+      body.classList.remove('light');
+      toggleBtn.textContent = '🌙';
     }
 
-    function createStars() {
-      stars = [];
-      for (let i = 0; i < numStars; i++) {
-        stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          radius: Math.random() * 1.2,
-          speed: Math.random() * 0.3 + 0.1
-        });
-      }
-    }
-
-    function drawStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'white';
-      for (const star of stars) {
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function updateStars() {
-      for (const star of stars) {
-        star.y += star.speed;
-        if (star.y > canvas.height) {
-          star.y = 0;
-          star.x = Math.random() * canvas.width;
-        }
-      }
-    }
-
-    function animate() {
-      updateStars();
-      drawStars();
-      requestAnimationFrame(animate);
-    }
-
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-      createStars();
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('light');
+      const mode = body.classList.contains('light') ? 'light' : 'dark';
+      localStorage.setItem('theme', mode);
+      toggleBtn.textContent = mode === 'light' ? '☀️' : '🌙';
     });
 
-    resizeCanvas();
-    createStars();
-    animate();
+    // IntersectionObserver fade-ins
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.section').forEach(s => obs.observe(s));
+
+    // Stars (lightweight)
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = []; let W, H; const N = 120;
+    function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; stars = Array.from({length:N}, _=>({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.4, s:0.1+Math.random()*0.3})); }
+    function draw(){ ctx.clearRect(0,0,W,H); for(const st of stars){ ctx.globalAlpha = 0.55 + Math.random()*0.45; ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI*2); ctx.fill(); st.y += st.s; if(st.y>H){ st.y = -2; st.x = Math.random()*W; } } requestAnimationFrame(draw); }
+    addEventListener('resize', resize); resize(); draw();
   </script>
 </body>
 </html>
