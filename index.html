@@ -24,14 +24,23 @@
 
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: #0f0f0f;
-      color: #e0e0e0;
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      color: #e0e0e0;
+      background: radial-gradient(circle at 50% 50%, #0b0b0b, #000000);
+      overflow: hidden;
+    }
+    canvas#stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
     .container {
       max-width: 900px;
@@ -39,28 +48,30 @@
       padding: 30px;
       display: flex;
       flex-direction: column;
-      background-color: #1a1a1a;
+      background-color: rgba(26, 26, 26, 0.85);
       border-radius: 16px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
     }
     .header {
       text-align: center;
       margin-bottom: 30px;
     }
     .header h1 {
-      font-size: 42px;
+      font-size: 48px;
       color: #00ff77;
       margin-bottom: 10px;
+      letter-spacing: 1px;
     }
     .header p {
       font-weight: 300;
-      font-size: 18px;
+      font-size: 20px;
       color: #b0b0b0;
     }
     .section {
       margin-bottom: 30px;
       padding: 20px;
-      background-color: #242424;
+      background-color: rgba(36, 36, 36, 0.8);
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
@@ -69,7 +80,6 @@
       font-weight: 700;
       margin-bottom: 15px;
       color: #00ff77;
-      text-align: left;
     }
     .section-content {
       font-weight: 300;
@@ -117,6 +127,7 @@
   </style>
 </head>
 <body>
+  <canvas id="stars"></canvas>
   <div class="container">
     <div class="header">
       <h1>Rushi B</h1>
@@ -126,27 +137,23 @@
     <div class="section">
       <h2 class="section-title">About Me</h2>
       <div class="section-content">
-        <p>I am an Electronics & Communications Engineering student based in southern India with a strong focus on product development, IoT systems, and AI/ML applications. I actively contribute as a DVT (Design Validation Testing) tester for Oppo and a community product reviewer for Nothing, bringing real-world product insights to the table.</p>
-        <p>My experience includes working on innovative projects such as autonomous drones, healthtech wearable solutions, and AI-driven platforms. I am also involved in organizing technical events and leading initiatives that merge hardware and software for impactful user experiences.</p>
+        <p>I am an Electronics & Communications Engineering student based in southern India with a passion for creating innovative technology solutions. I actively contribute as a DVT (Design Validation Testing) tester for Oppo and a community product reviewer for Nothing, offering practical insights to improve consumer technology.</p>
+        <p>My expertise spans product development, IoT systems, AI/ML applications, and immersive user experiences.</p>
       </div>
     </div>
-
-    <hr>
 
     <div class="section">
       <h2 class="section-title">Projects & Expertise</h2>
       <div class="section-content">
         <ul>
-          <li>Development of an autonomous hovering drone with interactive control systems.</li>
-          <li>Creation of a pregnancy companion app with a fetal monitoring hardware belt (MaHealAh).</li>
-          <li>IoT game development using ESP32, FastLED, and MQTT for interactive sensor-based gameplay.</li>
+          <li>Autonomous hovering drone with interactive control systems.</li>
+          <li>Pregnancy companion app with fetal monitoring belt (MaHealAh).</li>
+          <li>IoT game using ESP32, FastLED, and MQTT with sensor-based gameplay.</li>
           <li>AI/ML research on battery health prediction using NASA datasets.</li>
-          <li>Product testing and user experience optimization for consumer electronics.</li>
+          <li>Consumer electronics product testing and user experience optimization.</li>
         </ul>
       </div>
     </div>
-
-    <hr>
 
     <div class="section">
       <h2 class="section-title">Connect With Me</h2>
@@ -158,5 +165,64 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 100;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createStars() {
+      stars = [];
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.2,
+          speed: Math.random() * 0.3 + 0.1
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'white';
+      for (const star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function updateStars() {
+      for (const star of stars) {
+        star.y += star.speed;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      }
+    }
+
+    function animate() {
+      updateStars();
+      drawStars();
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createStars();
+    });
+
+    resizeCanvas();
+    createStars();
+    animate();
+  </script>
 </body>
 </html>
